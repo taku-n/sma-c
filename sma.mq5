@@ -1,5 +1,6 @@
 #import "sma.dll"
-void sma(const double &CLOSE[], double &sma[], const int N, const int PERIOD);
+void sma(const double &CLOSE[], double &sma[], const int N, const int PERIOD,
+		const int TIMEFRAME);
 #import
 
 input int PERIOD = 10;
@@ -37,7 +38,7 @@ int OnCalculate(const int       rates_total,
 		const long     &volume[],
 		const int      &spread[])
 {
-	sma(close, sma, rates_total, PERIOD);
+	sma(close, sma, rates_total, PERIOD, Period());
 
 	return rates_total;
 }

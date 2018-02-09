@@ -3,7 +3,7 @@ double average(const double CLOSE[], const int PERIOD, const int I);
 
 void sma(const double CLOSE[], double sma[], const int N, const int PERIOD)
 {
-	static int last_calculated;
+	static int last_calculated = 0;
 	       int i;
 
 	if (last_calculated > PERIOD - 1) {

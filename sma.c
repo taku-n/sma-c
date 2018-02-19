@@ -11,9 +11,9 @@ void sma(const double CLOSE[], double sma[], const int N, const int PERIOD,
 {
 	p_connect();
 
-	static int last_timeframe  = 0;
-	static int last_calculated = 0;
-	       int i;
+	static _Thread_local int last_timeframe  = 0;
+	static _Thread_local int last_calculated = 0;
+	                     int i;
 
 	char str[64] = {};
 	snprintf(str, sizeof str, "%d: %p", PERIOD, &last_timeframe);

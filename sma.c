@@ -1,42 +1,15 @@
 #include <stdio.h>
 
-#include "net.h"
-
-void sma(const double CLOSE[], double sma[], const int N, const int PERIOD,
-		const int TIMEFRAME);
+void sma(const double CLOSE[], double sma[], const int START,
+		const int END, const int PERIOD);
 double average(const double CLOSE[], const int PERIOD, const int I);
 
-void sma(const double CLOSE[], double sma[], const int N, const int PERIOD,
-		const int TIMEFRAME)
+void sma(const double CLOSE[], double sma[], const int START,
+		const int END, const int PERIOD)
 {
-	p_connect();
-
-	static _Thread_local int last_timeframe  = 0;
-	static _Thread_local int last_calculated = 0;
-	                     int i;
-
-	char str[64] = {};
-	snprintf(str, sizeof str, "%d: %p", PERIOD, &last_timeframe);
-	p(str, sizeof str);
-
-	if (last_timeframe != TIMEFRAME) {
-		last_calculated = 0;
-
-		last_timeframe = TIMEFRAME;
-	}
-
-	if (last_calculated > PERIOD - 1) {
-		i = last_calculated;
-	} else {
-		i = PERIOD - 1;
-	}
-
-	for (; i < N; i++) {
+	for (int i = START; i <= END; i++) {
 		sma[i] = average(CLOSE, PERIOD, i);
-		last_calculated = i;
 	}
-
-	p_disconnect();
 }
 
 double average(const double CLOSE[], const int PERIOD, const int I)
